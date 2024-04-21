@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} List of students {% endblock %}
+
+{% block content %}
+    <div class=container-fluid">
+        <div class="row gy-5">
+            {% if all_trainers %}
+                {% for trainer in all_trainers %}
+                    <div class="col-md-3">
+                        <div class="card">
+                             {% if trainer.image_up %}
+                                 <img src="{{ trainer.image_up.url }}" class="card-img-top" alt="No image">
+                             {% else %}
+                                 <img src="{% static "images/img.png" %}" class="card-img-top" alt="No image">
+                             {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ forloop.counter }}. {{ trainer.first_name|title }} {{ trainer.last_name|title }}</h5>
+                                <p class="card-text">{{ trainer.course|title }} {{ trainer.department|title }}</p>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" 
+                                            data-bs-toggle="dropdown" aria-expanded="false"> List of Actions
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{% url "update-trainer" trainer.id %}">Update</a></li>
+                                        <li><a class="dropdown-item" href="{% url "delete-trainer" trainer.id %}">Delete</a></li>
+                                        <li><a class="dropdown-item" href="{% url "detail-trainer" trainer.id%}">Details</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">No Trainer Available</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
