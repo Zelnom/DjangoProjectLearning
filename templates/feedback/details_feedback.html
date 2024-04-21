@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Details - {feedback} {% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <br><br>
+                <div class="card text-center">
+                    <div class="card-header">
+                      View details for feedback
+                    </div>
+                    <div class="card-body">
+                        </div>
+                        <h5 class="card-title">{{ feedback }}</h5>
+                        <p class="card-text"><strong>Email: </strong> {{ feedback.email }}</p>
+                        <p class="card-text"><strong>Feedback created for the trainer: </strong> {{ feedback.trainer }}</p>
+                        <h5 class="card-text"><strong>Feedback: </strong> {{ feedback.message }}</h5>
+                        <a href="{% url 'list-of-feedbacks' %}" class="btn btn-primary">Back to list of feedbacks</a>
+                    </div>
+                    <div class="card-footer text-body-secondary">
+                       <strong>Created at: </strong> {{ feedback.created_at|date:'d-m-Y H:i:s' }}/ <strong>Updated at: </strong> {{ feedback.updated_at|date:"d-m-Y H:i:s" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
